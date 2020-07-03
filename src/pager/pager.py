@@ -9,7 +9,7 @@ def trace(frame, event, arg):
 
 
 def start_recording():
-    sys.settrace(cpager.run_on_line)
+    sys.settrace(trace)
 
 
 if __name__ == '__main__':
