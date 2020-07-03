@@ -5,11 +5,6 @@
 PyObject *module = NULL;
 
 
-static PyObject* version(PyObject* self) {
-    return Py_BuildValue("s", "v 1.0");
-}
-
-
 static PyObject* run_on_line(PyObject* self) {
     // call whatever you want here
     printf("Call whatever you want here...\n");
