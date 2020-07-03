@@ -25,16 +25,16 @@ static PyMethodDef methods[]= {
 
 
 static struct PyModuleDef cpagerModule = {
-	PyModuleDef_HEAD_INIT,
-	"cpager",
-	"description",
-	-1,
-	methods
+    PyModuleDef_HEAD_INIT,
+    "cpager",
+    "description",
+    -1,
+    methods
 };
 
 
 PyMODINIT_FUNC PyInit_cpager(void) {
-	module = PyModule_Create(&cpagerModule);
+    module = PyModule_Create(&cpagerModule);
     PyModule_AddStringConstant(module, "version", "0.0.1");
-	return module;
+    return module;
 }
