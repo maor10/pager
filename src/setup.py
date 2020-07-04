@@ -1,14 +1,20 @@
 import glob
 import os
-
+from pathlib import Path
 from setuptools import setup, find_packages, Extension
 
+BASE_C_SOURCES_DIRECTORY = Path(__file__).resolve().parent / Path('cpager')
+extension = Extension("cpager",
+                      sources=[str(BASE_C_SOURCES_DIRECTORY / "cpager.c")],
+                      include_dirs=[str(BASE_C_SOURCES_DIRECTORY / Path('libs/c'))],
+                      extra_objects=[str(BASE_C_SOURCES_DIRECTORY / "libs" / "libcriu.a")],
+                      libraries=['protobuf-c'])
 
-BASE_C_SOURCES_DIRECTORY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cpager")
-PATHS = glob.glob(BASE_C_SOURCES_DIRECTORY + '/**/*.c', recursive=True)
-
-module = Extension("cpager", sources=PATHS)
 setup(name='pager',
       version='1.0',
       packages=find_packages(),
-      ext_modules=[module])
+      ext_modules=[
+          extension
+      ],
+      install_requires=['click']
+      )
