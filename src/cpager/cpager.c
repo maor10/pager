@@ -6,6 +6,7 @@
 #include <Python.h>
 
 #define RAISE_PYTHON_ERROR_ON_FAIL(arg) if (arg < 0) { PyErr_Format(PyExc_ValueError, "%s (%d)", strerror(errno), arg); return NULL; }
+#define LOG_FILE "log.txt"
 
 
 PyObject *module = NULL;
@@ -26,6 +27,7 @@ static PyObject* take_snapshot(PyObject* self, PyObject *args) {
     criu_init_opts();
     criu_set_pid(pid);
     criu_set_tcp_established(true);
+    criu_set_log_file(LOG_FILE);
     criu_set_shell_job(true);
     criu_set_leave_running(true);
     criu_set_work_dir_fd(dir_fd);
@@ -49,7 +51,7 @@ static PyObject* restore_from_snapshot(PyObject* self, PyObject* args) {
     criu_init_opts();
     criu_set_shell_job(true);
     criu_set_tcp_established(true);
-    criu_set_log_file("log.txt");
+    criu_set_log_file(LOG_FILE);
     criu_set_images_dir_fd(dir_fd);
     criu_set_work_dir_fd(dir_fd);
     errno = 0;
