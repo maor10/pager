@@ -49,8 +49,10 @@ static PyObject* restore_from_snapshot(PyObject* self, PyObject* args) {
     criu_init_opts();
     criu_set_shell_job(true);
     criu_set_tcp_established(true);
+    criu_set_log_file("log.txt");
     criu_set_images_dir_fd(dir_fd);
     criu_set_work_dir_fd(dir_fd);
+    errno = 0;
     RAISE_PYTHON_ERROR_ON_FAIL(criu_restore());
 
     return Py_BuildValue("");

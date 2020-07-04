@@ -22,6 +22,7 @@ class Listener:
     def run(self):
         """
         Runs the listener in a forever loop waiting and processing incoming snapshot requests
+        :return:
         """
         while True:
             conn = self.listener.accept()
