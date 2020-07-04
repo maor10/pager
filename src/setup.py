@@ -16,5 +16,10 @@ setup(name='pager',
       ext_modules=[
           extension
       ],
-      install_requires=['click']
+      install_requires=['click'],
+      entry_points={
+          'console_scripts': [
+              'pager = pager.cli:cli',
+          ],
+      }
       )

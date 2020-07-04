@@ -34,7 +34,7 @@ def list_pids():
 @click.option('--pid', prompt='PID to restore')
 def restore(pid):
     if not is_root_user():
-        print("You must be root to run the listener")
+        print("You must be root to run restore")
         return
     cpager.restore_from_snapshot(str(BASE_DIRECTORY / pid))
 

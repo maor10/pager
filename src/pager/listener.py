@@ -1,5 +1,3 @@
-import os
-import time
 from pathlib import Path
 
 import cpager
@@ -9,6 +7,9 @@ from pager.consts import PORT, BASE_DIRECTORY
 
 
 class Listener:
+    """
+    Responsible for listening to incoming requests to take snapshots of processes
+    """
 
     def __init__(self, listener: MultiProcessingListener, base_directory: Path):
         self.listener = listener
@@ -19,6 +20,9 @@ class Listener:
         return cls(MultiProcessingListener(('0.0.0.0', PORT)), BASE_DIRECTORY)
 
     def run(self):
+        """
+        Runs the listener in a forever loop waiting and processing incoming snapshot requests
+        """
         while True:
             conn = self.listener.accept()
             pid = conn.recv()
